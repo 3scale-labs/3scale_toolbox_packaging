@@ -1,0 +1,38 @@
+language: ruby
+sudo: required
+install: true
+matrix:
+  include:
+  - os: osx
+    env:
+    - BUILD_ENGINE=native
+    rvm: 2.4.0
+  - os: linux
+    env:
+    - BUILD_ENGINE=docker
+    - DOCKER_TAG=xenial-2.4.1
+    services:
+    - docker
+  - os: linux
+    env:
+    - BUILD_ENGINE=docker
+    - DOCKER_TAG=centos7-2.4
+    services:
+    - docker
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: GAPV8h4dgp+ASHZqzOlykTocG78xscrT846QoELsFWTSb0OB48Omn/gUE6dIlShPA3Ou9b7JQ+kKUTFhU8DRon8QihMIzprrmXP4IpcDvJLu5tQVdENANLQ01xiOh71cwf29vaFCrFkXr9LlmyTs3Z2lCHTpuOHYgETHIDcOR8zkGogdS5TPi/lmpkoPZ8XbndJfw3Y46fNu/GlKKgFpn9fzj9oGHTjFYuAuL2iGrr1pthLeBEc+B3DueLSU1OJKJVqfxuFhHLZgK6jv/BU3gWJERPkLgzYx2O507Ofa0Urp9W14gkNGrOUCh7+y5PlKOViku8FN0p7kOWEhyOWUhzn1jG9qjulLNjddz5n1Gp0mc0/5iEyrp35cyTptIUfQfIiSMe1eRGHK44NxzOHmsAO5X015y1SPujUWRq9KZjk/TuCWx6x7m4vjVgWVoYz51YIiUQiuKkEtQJqBAgseUQrJWmgWzem7edgA23B+LopnDasjih6ja+hkG2Dj+Ou/qeUcHC5C8fdA3oHNqBexyt3eTKsv1wtolV+8sKajfQ0P/y2IYJJlJRVrAMN/cZMDRRgyn8PXgFTMP7FwzIm6SgqG2A+xa+CvWwPGC2NlVuHNKME4YjFCfVdwzCxb9af/LAwsNgwg9W8g3O0zrlrKnFTL7Ox4HJYqFDcCkrWnAWY=
+  file_glob: true
+  file:
+  - pkg/*.rpm
+  - pkg/*.deb
+  - pkg/*.pkg
+  on:
+    tags: true
+
+before_script:
+- rm -rf pkg/*
+script:
+- "./${BUILD_ENGINE}.sh"
