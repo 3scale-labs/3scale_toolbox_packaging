@@ -3,20 +3,19 @@ name '3scale_toolbox'
 
 dependency 'ruby'
 dependency 'rubygems'
-dependency 'bundler'
 
 version '0.5.0' do
-  source url: "https://github.com/3scale/3scale_toolbox/archive/v#{version}.tar.gz",
-    md5: '95475ea169e618636e1d387c3ae43a87'
+  source url: "https://github.com/3scale/#{name}/archive/v#{version}.tar.gz",
+         md5: '95475ea169e618636e1d387c3ae43a87'
 end
 
-relative_path "3scale_toolbox-#{version}"
+relative_path "#{name}-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
   usr_bin_dir = '/usr/local/bin'
   install_bin_dir = File.join(install_dir, 'bin')
-  gem 'install 3scale_toolbox' \
+  gem "install #{name}" \
       " --bindir '#{install_bin_dir}'" \
       ' --no-rdoc --no-ri' \
       " --version #{version}", env: env
