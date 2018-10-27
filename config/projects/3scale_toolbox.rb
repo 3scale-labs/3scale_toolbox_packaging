@@ -21,6 +21,9 @@ dependency 'preparation'
 
 override :ruby, version: '2.3.1'
 override :rubygems, version: '2.4.8'
+# override url to avoid ftp URI
+# https://blog.travis-ci.com/2018-07-23-the-tale-of-ftp-at-travis-ci
+override :libffi, source: { url: 'https://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz' }
 override name.to_sym, version: build_version
 
 dependency name
