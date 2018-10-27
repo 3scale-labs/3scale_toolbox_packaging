@@ -1,5 +1,6 @@
 language: ruby
 sudo: required
+if: tag IS present
 install: true
 matrix:
   include:
