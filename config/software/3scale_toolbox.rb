@@ -20,7 +20,15 @@ build do
       " --bindir '#{install_bin_dir}'" \
       ' --no-rdoc --no-ri' \
       " --version #{version}", env: env
-  # make symlinks
-  link("#{install_bin_dir}/3scale", "#{usr_bin_dir}/3scale")
-  project.extra_package_file("#{usr_bin_dir}/3scale")
+  # entrypoint
+  entrypoint_dest = "#{usr_bin_dir}/3scale"
+  erb(
+    source: '3scale.erb',
+    dest: entrypoint_dest,
+    vars: {
+      install_bin_dir: install_bin_dir
+    },
+    mode: 0755
+  )
+  project.extra_package_file(entrypoint_dest)
 end

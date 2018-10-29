@@ -1,80 +1,79 @@
-3scale_toolbox Packaging project
-==============================
-This project creates full-stack platform-specific packages for
-`3scale_toolbox`!
+# 3scale_toolbox Packaging project
+This project uses [Chef's Omnibus toolchain](https://github.com/chef/omnibus) to
+create full-stack platform-specific
+[3scale_toolbox](https://github.com/3scale/3scale_toolbox) packages.
 
-Installation
-------------
-You must have a sane Ruby 2.0.0+ environment with Bundler installed. Ensure all
-the required gems are installed:
+**Support for running 3scale_toolbox on the following platforms
+will be provided on a best-effort basis.**
 
-```shell
-$ bundle install --binstubs
+Platforms
+
+* [CentOS/Fedora](#centos-fedora)
+* [Ubuntu/Debian](#ubuntu-debian)
+* [Mac OS X](#mac-os-x)
+
+## Centos Fefora
+
+1. Install the `RPM` package using the `rpm` installer utility.
+
+```bash
+# rpm -Uvh https://github.com/3scale/3scale_toolbox_packaging/releases/download/v0.5.0/3scale-toolbox-0.5.0-1.el7.x86_64.rpm
 ```
 
-Usage
------
-### Build
+Files will be installed in `/opt/3scale_toolbox`
 
-You create a platform-specific package using the `build project` command:
+2. Test executing `help` command
 
-```shell
-$ bin/omnibus build 3scale_toolbox
+```bash
+# 3scale help
 ```
 
-The platform/architecture type of the package created will match the platform
-where the `build project` command is invoked. For example, running this command
-on a MacBook Pro will generate a Mac OS X package. After the build completes
-packages will be available in the `pkg/` folder.
+## Ubuntu Debian
 
-### Clean
+1. Download `DEB` package.
 
-You can clean up all temporary files generated during the build process with
-the `clean` command:
-
-```shell
-$ bin/omnibus clean 3scale_toolbox
+```bash
+# wget https://github.com/3scale/3scale_toolbox_packaging/releases/download/v0.5.0/3scale-toolbox_0.5.0-1_amd64.deb
 ```
 
-Adding the `--purge` purge option removes __ALL__ files generated during the
-build including the project install directory (`/opt/3scale_toolbox`) and
-the package cache directory (`/var/cache/omnibus/pkg`):
+2. Install the package using the `dpkg` installer utility.
 
-```shell
-$ bin/omnibus clean 3scale_toolbox --purge
+```bash
+dpkg -i 3scale-toolbox_0.5.0-1_amd64.deb
 ```
 
-### Publish
+Files will be installed in `/opt/3scale_toolbox`
 
-Omnibus has a built-in mechanism for releasing to a variety of "backends", such
-as Amazon S3. You must set the proper credentials in your `omnibus.rb` config
-file or specify them via the command line.
+3. Test executing `help` command
 
-```shell
-$ bin/omnibus publish path/to/*.deb --backend s3
+```bash
+# 3scale help
 ```
 
-### Help
+## Mac OS X
 
-Full help for the Omnibus command line interface can be accessed with the
-`help` command:
+1. Download `pkg` package.
 
-```shell
-$ bin/omnibus help
+```bash
+# wget https://github.com/3scale/3scale_toolbox_packaging/releases/download/v0.5.0/3scaletoolbox-0.5.0-1.pkg
 ```
 
-Version Manifest
-----------------
+2. Install the package using the `installer` installer utility.
 
-Git-based software definitions may specify branches as their
-default_version. In this case, the exact git revision to use will be
-determined at build-time unless a project override (see below) or
-external version manifest is used.  To generate a version manifest use
-the `omnibus manifest` command:
-
-```
-omnibus manifest PROJECT -l warn
+```bash
+# installer -pkg 3scaletoolbox-0.5.0-1.pkg -target /
 ```
 
-This will output a JSON-formatted manifest containing the resolved
-version of every software definition.
+Files will be installed in `/opt/3scale_toolbox`
+
+3. Create symbolic link on `PATH`
+
+```bash
+# ln -s /opt/3scale_toolbox/bin/3scale /usr/local/bin/3scale
+```
+
+4. Test executing `help` command
+
+```bash
+# 3scale help
+```
