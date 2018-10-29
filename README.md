@@ -12,7 +12,7 @@ Platforms
 * [Ubuntu/Debian](#ubuntu-debian)
 * [Mac OS X](#mac-os-x)
 
-## Centos Fefora
+## Centos Fedora
 
 1. Install the `RPM` package using the `rpm` installer utility.
 
