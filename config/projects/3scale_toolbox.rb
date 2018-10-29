@@ -8,6 +8,12 @@ name '3scale_toolbox'
 maintainer 'Eguzki Astiz Lezaun'
 homepage 'https://github.com/3scale/3scale_toolbox'
 
+project_self = self
+package :pkg do
+  identifier "com.3scale.pkg.#{project_self.name}"
+  # signing_identity 'acbd1234'
+end
+
 # Defaults to C:/3scale_toolbox on Windows
 # and /opt/3scale_toolbox on all other platforms
 install_dir "#{default_root}/#{name}"
