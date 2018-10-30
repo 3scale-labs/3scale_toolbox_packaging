@@ -77,3 +77,17 @@ ln -s /opt/3scale_toolbox/bin/3scale /usr/local/bin/3scale
 ```bash
 3scale help
 ```
+
+## Troubleshooting
+
+* There are known issues running `3scale toolbox` when `RVM` is installed and active.
+You can take the following actions to resolve them:
+  * Disable RVM for the current session, then run the toolbox
+```bash
+rvm use system
+3scale help
+```
+  * Disable RVM just for running one command
+```bash
+env -u GEM_PATH 3scale help
+```
