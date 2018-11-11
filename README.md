@@ -22,7 +22,7 @@ Platforms
 
 Files will be installed in `/opt/3scale_toolbox`
 
-2. Test executing `help` command
+2. Test executing `help` command.
 
 ```bash
 # 3scale help
