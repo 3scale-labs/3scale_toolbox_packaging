@@ -22,7 +22,7 @@ rpm -Uvh https://github.com/3scale/3scale_toolbox_packaging/releases/download/v0
 
 Files will be installed in `/opt/3scale_toolbox`
 
-2. Test executing `help` command
+2. Test executing `help` command.
 
 ```bash
 3scale help
