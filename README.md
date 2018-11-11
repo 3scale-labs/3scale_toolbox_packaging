@@ -44,7 +44,7 @@ dpkg -i 3scale-toolbox_0.5.0-1_amd64.deb
 
 Files will be installed in `/opt/3scale_toolbox`
 
-3. Test executing `help` command
+3. Test executing `help` command.
 
 ```bash
 # 3scale help
