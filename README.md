@@ -66,7 +66,7 @@ installer -pkg 3scaletoolbox-0.5.0-1.pkg -target /
 
 Files will be installed in `/opt/3scale_toolbox`
 
-3. Create symbolic link on `PATH`
+3. Create symbolic link on `PATH`.
 
 ```bash
 ln -s /opt/3scale_toolbox/bin/3scale /usr/local/bin/3scale
