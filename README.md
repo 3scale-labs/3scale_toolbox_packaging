@@ -7,7 +7,7 @@ create full-stack platform-specific
 will be provided on a best-effort basis.**
 
 ## RELEASES
-Download packages from [latest release](https://github.com/3scale/3scale_toolbox/releases/latest) section.
+Download packages from [latest release](https://github.com/3scale/3scale_toolbox_packaging/releases/latest) section.
 
 ## PLATFORMS
 
