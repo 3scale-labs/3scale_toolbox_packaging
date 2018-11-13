@@ -40,3 +40,12 @@ dependency 'version-manifest'
 exclude '**/.git'
 exclude '**/bundler/git'
 exclude '**/vendor'
+
+package :msi do
+  upgrade_code '9f6ec4a5-d48c-4fc1-a2c5-e16c81a38b22'
+
+  # Use WixUtilExtension to support WixBroadcastEnvironmentChange and notify
+  # the system that we're updating an environment variable (the PATH).
+  wix_candle_extension 'WixUtilExtension'
+  wix_light_extension 'WixUtilExtension'
+end
