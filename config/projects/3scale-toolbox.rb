@@ -4,12 +4,12 @@
 # All Rights Reserved.
 #
 
-name '3scale_toolbox'
+name '3scale-toolbox'
 maintainer 'Eguzki Astiz Lezaun'
 homepage 'https://github.com/3scale/3scale_toolbox'
 
-# Defaults to C:/3scale_toolbox on Windows
-# and /opt/3scale_toolbox on all other platforms
+# Defaults to C:/3scale-toolbox on Windows
+# and /opt/3scale-toolbox on all other platforms
 install_dir "#{default_root}/#{name}"
 
 build_version '0.5.1'

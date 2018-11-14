@@ -1,9 +1,9 @@
-# 3scale_toolbox Packaging project
+# 3scale-toolbox Packaging project
 This project uses [Chef's Omnibus toolchain](https://github.com/chef/omnibus) to
 create full-stack platform-specific
-[3scale_toolbox](https://github.com/3scale/3scale_toolbox) packages.
+[3scale-toolbox](https://github.com/3scale/3scale_toolbox) packages.
 
-**Support for running 3scale_toolbox on the following platforms
+**Support for running 3scale-toolbox on the following platforms
 will be provided on a best-effort basis.**
 
 ## RELEASES
@@ -23,7 +23,7 @@ Download packages from [latest release](https://github.com/3scale/3scale_toolbox
 rpm -Uvh `URL_RPM_PACKAGE`
 ```
 
-Files will be installed in `/opt/3scale_toolbox`
+Files will be installed in `/opt/3scale-toolbox`
 
 2. Test executing `help` command.
 
@@ -45,7 +45,7 @@ wget `URL_DEB_PACKAGE`
 dpkg -i 3scale-toolbox_VERSION.deb
 ```
 
-Files will be installed in `/opt/3scale_toolbox`
+Files will be installed in `/opt/3scale-toolbox`
 
 3. Test executing `help` command.
 
@@ -67,12 +67,12 @@ wget `URL_PKG_PACKAGE`
 installer -pkg 3scaletoolbox-VERSION.pkg -target /
 ```
 
-Files will be installed in `/opt/3scale_toolbox`
+Files will be installed in `/opt/3scale-toolbox`
 
 3. Create symbolic link on `PATH`.
 
 ```bash
-ln -s /opt/3scale_toolbox/bin/3scale /usr/local/bin/3scale
+ln -s /opt/3scale-toolbox/bin/3scale /usr/local/bin/3scale
 ```
 
 4. Test executing `help` command
