@@ -14,6 +14,7 @@ Download packages from [latest release](https://github.com/3scale/3scale_toolbox
 * [CentOS/Fedora](#centos-fedora)
 * [Ubuntu/Debian](#ubuntu-debian)
 * [Mac OS X](#mac-os-x)
+* [Windows](#windows)
 
 ### Centos Fedora
 
@@ -80,6 +81,13 @@ ln -s /opt/3scale-toolbox/bin/3scale /usr/local/bin/3scale
 ```bash
 3scale help
 ```
+
+### Windows
+Requires 64 bit Windows 8.1 or greater or 64 bit Windows Server 2012r2 or greater.
+
+1. Download `MSI` package.
+
+Once installed, you'll have access to the `3scale` command from your command shell
 
 ### Troubleshooting
 
