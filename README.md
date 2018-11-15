@@ -15,6 +15,7 @@ Download packages from [latest release](https://github.com/3scale/3scale_toolbox
 * [Ubuntu/Debian](#ubuntu-debian)
 * [Mac OS X](#mac-os-x)
 * [Windows](#windows)
+* [Docker](#docker)
 
 ### Centos Fedora
 
@@ -88,6 +89,20 @@ Requires 64 bit Windows 8.1 or greater or 64 bit Windows Server 2012r2 or greate
 1. Download `MSI` package.
 
 Once installed, you'll have access to the `3scale` command from your command shell
+
+### Docker
+
+Docker repository
+
+```
+quay.io/redhat/3scale-toolbox
+```
+
+1. Test executing `help` command
+
+```bash
+docker run --rm quay.io/redhat/3scale-toolbox:VERSION 3scale help
+```
 
 ### Troubleshooting
 
