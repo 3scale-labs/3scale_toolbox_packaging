@@ -12,6 +12,8 @@ homepage 'https://github.com/3scale/3scale_toolbox'
 # and /opt/3scale-toolbox on all other platforms
 install_dir "#{default_root}/#{name}"
 
+# This line is parsed to create docker image
+# regexp: ^build_version '\d+\.\d+\.\d+'$
 build_version '0.5.1'
 
 build_iteration 1
