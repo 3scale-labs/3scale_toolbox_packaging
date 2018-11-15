@@ -1,9 +1,9 @@
-# 3scale_toolbox Packaging project
+# 3scale-toolbox Packaging project
 This project uses [Chef's Omnibus toolchain](https://github.com/chef/omnibus) to
 create full-stack platform-specific
-[3scale_toolbox](https://github.com/3scale/3scale_toolbox) packages.
+[3scale-toolbox](https://github.com/3scale/3scale_toolbox) packages.
 
-**Support for running 3scale_toolbox on the following platforms
+**Support for running 3scale-toolbox on the following platforms
 will be provided on a best-effort basis.**
 
 ## RELEASES
@@ -14,6 +14,7 @@ Download packages from [latest release](https://github.com/3scale/3scale_toolbox
 * [CentOS/Fedora](#centos-fedora)
 * [Ubuntu/Debian](#ubuntu-debian)
 * [Mac OS X](#mac-os-x)
+* [Windows](#windows)
 
 ### Centos Fedora
 
@@ -23,7 +24,7 @@ Download packages from [latest release](https://github.com/3scale/3scale_toolbox
 rpm -Uvh `URL_RPM_PACKAGE`
 ```
 
-Files will be installed in `/opt/3scale_toolbox`
+Files will be installed in `/opt/3scale-toolbox`
 
 2. Test executing `help` command.
 
@@ -45,7 +46,7 @@ wget `URL_DEB_PACKAGE`
 dpkg -i 3scale-toolbox_VERSION.deb
 ```
 
-Files will be installed in `/opt/3scale_toolbox`
+Files will be installed in `/opt/3scale-toolbox`
 
 3. Test executing `help` command.
 
@@ -67,12 +68,12 @@ wget `URL_PKG_PACKAGE`
 installer -pkg 3scaletoolbox-VERSION.pkg -target /
 ```
 
-Files will be installed in `/opt/3scale_toolbox`
+Files will be installed in `/opt/3scale-toolbox`
 
 3. Create symbolic link on `PATH`.
 
 ```bash
-ln -s /opt/3scale_toolbox/bin/3scale /usr/local/bin/3scale
+ln -s /opt/3scale-toolbox/bin/3scale /usr/local/bin/3scale
 ```
 
 4. Test executing `help` command
@@ -80,6 +81,13 @@ ln -s /opt/3scale_toolbox/bin/3scale /usr/local/bin/3scale
 ```bash
 3scale help
 ```
+
+### Windows
+Requires 64 bit Windows 8.1 or greater or 64 bit Windows Server 2012r2 or greater.
+
+1. Download `MSI` package.
+
+Once installed, you'll have access to the `3scale` command from your command shell
 
 ### Troubleshooting
 

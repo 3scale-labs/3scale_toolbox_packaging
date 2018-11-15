@@ -4,18 +4,12 @@
 # All Rights Reserved.
 #
 
-name '3scale_toolbox'
+name '3scale-toolbox'
 maintainer 'Eguzki Astiz Lezaun'
 homepage 'https://github.com/3scale/3scale_toolbox'
 
-project_self = self
-package :pkg do
-  identifier "com.3scale.pkg.#{project_self.name}"
-  # signing_identity 'acbd1234'
-end
-
-# Defaults to C:/3scale_toolbox on Windows
-# and /opt/3scale_toolbox on all other platforms
+# Defaults to C:/3scale-toolbox on Windows
+# and /opt/3scale-toolbox on all other platforms
 install_dir "#{default_root}/#{name}"
 
 build_version '0.5.1'
@@ -40,3 +34,24 @@ dependency 'version-manifest'
 exclude '**/.git'
 exclude '**/bundler/git'
 exclude '**/vendor'
+
+project_self = self
+package :pkg do
+  identifier "com.3scale.pkg.#{project_self.name}"
+  # signing_identity 'acbd1234'
+end
+
+project_location_dir = name
+package :msi do
+  upgrade_code '9f6ec4a5-d48c-4fc1-a2c5-e16c81a38b22'
+
+  parameters(
+    ProjectLocationDir: project_location_dir,
+    ThreeScaleToolboxPathGuid: '2fecd030-ef11-4357-93dc-8160b7562e4b'
+  )
+
+  # Use WixUtilExtension to support WixBroadcastEnvironmentChange and notify
+  # the system that we're updating an environment variable (the PATH).
+  wix_candle_extension 'WixUtilExtension'
+  wix_light_extension 'WixUtilExtension'
+end
