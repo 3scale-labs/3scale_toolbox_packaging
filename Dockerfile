@@ -1,4 +1,4 @@
-FROM centos/ruby-24-centos7:latest
+FROM centos/ruby-25-centos7:latest
 MAINTAINER Eguzki Astiz Lezaun <eastizle@redhat.com>
 
 USER root
