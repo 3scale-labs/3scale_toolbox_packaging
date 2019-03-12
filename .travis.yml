@@ -7,17 +7,17 @@ matrix:
   - os: osx
     env:
     - BUILD_ENGINE=native
-    rvm: 2.4.0
+    rvm: 2.5.0
   - os: linux
     env:
     - BUILD_ENGINE=docker
-    - DOCKER_TAG=xenial-2.4.1
+    - DOCKER_TAG=xenial-2.5.3
     services:
     - docker
   - os: linux
     env:
     - BUILD_ENGINE=docker
-    - DOCKER_TAG=centos7-2.4
+    - DOCKER_TAG=centos7-2.5.3
     services:
     - docker
 deploy:
