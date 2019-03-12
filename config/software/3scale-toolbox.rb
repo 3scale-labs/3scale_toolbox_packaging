@@ -1,6 +1,6 @@
 # These options are required for all software definitions
 name '3scale-toolbox'
-default_version '0.5.1'
+default_version '0.7.0'
 
 dependency 'ruby'
 dependency 'rubygems'
@@ -15,6 +15,11 @@ version '0.5.1' do
          md5: '93af786407583add22b652d8ea6c600e'
 end
 
+version '0.7.0' do
+  source url: "https://github.com/3scale/3scale_toolbox/archive/v#{version}.tar.gz",
+         md5: 'a483747364d0fcff8229d4b71656b365'
+end
+
 relative_path "3scale_toolbox-#{version}"
 
 build do
@@ -23,7 +28,7 @@ build do
   install_bin_dir = File.join(install_dir, 'bin')
   gem 'install 3scale_toolbox' \
       " --bindir '#{install_bin_dir}'" \
-      ' --no-rdoc --no-ri' \
+      ' -N' \
       " --version #{version}", env: env
 
   unless windows?

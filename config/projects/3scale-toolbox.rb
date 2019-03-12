@@ -14,18 +14,15 @@ install_dir "#{default_root}/#{name}"
 
 # This line is parsed to create docker image
 # regexp: ^build_version '\d+\.\d+\.\d+'$
-build_version '0.5.1'
+build_version '0.7.0'
 
 build_iteration 1
 
 # Creates required build directories
 dependency 'preparation'
 
-override :ruby, version: '2.3.1'
-override :rubygems, version: '2.4.8'
-# override url to avoid ftp URI
-# https://blog.travis-ci.com/2018-07-23-the-tale-of-ftp-at-travis-ci
-override :libffi, source: { url: 'https://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz' }
+override :ruby, version: '2.5.3'
+override :rubygems, version: '3.0.3'
 override name.to_sym, version: build_version
 
 dependency name
