@@ -10,3 +10,5 @@ RUN TOOLBOX_VERSION=$(grep -P "^build_version '\d+\.\d+\.\d+'$" 3scale-toolbox.r
     --no-rdoc --no-ri"
 
 USER default
+
+ENTRYPOINT [ "/bin/bash" ]
