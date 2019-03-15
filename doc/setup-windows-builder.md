@@ -4,11 +4,6 @@ Setup project builder on Windows 10
 Install building tools
 ----------------------
 
-* Omnibus Toolchain (1.1.93)
-
-```
-https://packages.chef.io/files/stable/omnibus-toolchain/1.1.93/windows/2012r2/omnibus-toolchain-1.1.93-1-x64.msi
-```
 
 * Git (to clone the repo and for Omnibus caching):
 
@@ -41,28 +36,32 @@ Install the "Desktop Development with C++" and Windows 8.1 SDK components.
 https://visualstudio.microsoft.com/downloads/
 ```
 
+* Ruby framework and Devkit 2.5.3
+Make sure MSYS is installed in `C:\msys2`
+
+```
+https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.5.3-1/rubyinstaller-devkit-2.5.3-1-x64.exe
+```
+
 Preparation Steps
 -----------------
 
-1. tmp file
-Create tmp in `C:\opscode\omnibus-toolchain\embedded\bin` (yes, *in* `bin`). If
-you don't do that the Omnibus build will emit warnings and eventually fail with
-an obscure "too many arguments" error.
-
-Thanks to [aptible](https://github.com/aptible/omnibus-aptible-toolbelt/blob/master/doc/WINDOWS.md) for this tip.
+1. Install bundler
+On Powershell
+```
+gem install bundler
+```
 
 2. Set up environment in *windows power shell* with *administrator* rights
 
+Just copy&paste
 ```
-$env:path = "C:\opscode\omnibus-toolchain\embedded\bin;$env:path"
-$env:path = "C:\opscode\omnibus-toolchain\embedded\bin\usr\bin;$env:path"
-$env:path = "C:\opscode\omnibus-toolchain\embedded\bin\usr\bin;$env:path"
-$env:path = "C:\opscode\omnibus-toolchain\embedded\bin\mingw64\bin;$env:path"
+$env:path = "$env:path;C:\msys2\usr\bin"
+$env:path = "$env:path;C:\msys2\mingw64\bin"
 $env:path = "C:\Program Files\7-Zip;$env:path"
 $env:path = "C:\Program Files (x86)\WiX Toolset v3.11\bin;$env:path"
 $env:path = "C:\Program Files (x86)\Windows Kits\8.1\bin\x64;$env:path"
 $env:MSYSTEM = "mingw64"
-$env:OMNIBUS_TOOLCHAIN_INSTALL_DIR = "C:\opscode\omnibus-toolchain"
 $env:OMNIBUS_WINDOWS_ARCH = "x64"
 ```
 

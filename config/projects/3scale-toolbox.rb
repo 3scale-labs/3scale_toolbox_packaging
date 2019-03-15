@@ -22,7 +22,7 @@ build_iteration 1
 dependency 'preparation'
 
 override :ruby, version: '2.5.3'
-override :rubygems, version: '3.0.3'
+override :rubygems, version: '2.7.6'
 # override url to avoid ftp URI
 # https://blog.travis-ci.com/2018-07-23-the-tale-of-ftp-at-travis-ci
 override :libffi, source: { url: 'https://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz' }
