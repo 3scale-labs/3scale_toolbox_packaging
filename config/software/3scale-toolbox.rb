@@ -1,6 +1,6 @@
 # These options are required for all software definitions
 name '3scale-toolbox'
-default_version '0.10.0'
+default_version '0.11.0'
 
 dependency 'ruby'
 dependency 'rubygems'
@@ -33,6 +33,11 @@ end
 version '0.10.0' do
   source url: "https://github.com/3scale/3scale_toolbox/archive/v#{version}.tar.gz",
          md5: '3ab7e5f7b01e6b6527bdab7afc519692'
+end
+
+version '0.11.0' do
+  source url: "https://github.com/3scale/3scale_toolbox/archive/v#{version}.tar.gz",
+         md5: '54a852b3bf9b3b50fc9a0e2a2efac554'
 end
 
 relative_path "3scale_toolbox-#{version}"
