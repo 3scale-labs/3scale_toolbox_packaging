@@ -16,6 +16,8 @@ Download packages from [latest release](https://github.com/3scale/3scale_toolbox
 * [Mac OS X](#mac-os-x)
 * [Windows](#windows)
 * [Docker](#docker)
+* [Kubernetes](#kubernetes)
+
 
 ### Centos Fedora
 
@@ -101,7 +103,104 @@ quay.io/redhat/3scale-toolbox
 1. Test executing `help` command
 
 ```bash
-docker run --rm quay.io/redhat/3scale-toolbox:VERSION 3scale help
+docker run --rm quay.io/redhat/3scale-toolbox 3scale help
+```
+
+### Kubernetes
+
+Also working with Openshift.
+
+1. Provision the *3scale-toolbox* secret with your 3scale credentials
+
+```bash
+3scale remote add 3scale-instance "https://123...456@MY-TENANT-admin.3scale.net/"
+kubectl create secret generic 3scale-toolbox --from-file="$HOME/.3scalerc.yaml"
+```
+
+2. Deploy Job template to run your 3scale command.
+In the example shown below, `3scale remote list` command will be run.
+
+Write the following yaml template content in a file called `toolbox-job.yaml`.
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: toolbox
+spec:
+  backoffLimit: 4
+  activeDeadlineSeconds: 300
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: toolbox-job
+          image: quay.io/redhat/3scale-toolbox
+          env:
+            - name: HOME
+              value: /var/lib/toolbox
+          args:
+            - 3scale
+            - remote
+            - list
+          volumeMounts:
+            - name: toolbox-config
+              mountPath: /var/lib/toolbox
+      volumes:
+        - name: toolbox-config
+          secret:
+            secretName: 3scale-toolbox
+```
+
+Deploy the job
+
+```bash
+kubectl create -f toolbox-job.yaml
+```
+
+Check on the status of the Job
+
+```bash
+$ kubectl describe jobs/toolbox
+
+Name:                     toolbox
+Namespace:                test
+Selector:                 controller-uid=057ec3ff-fa45-11e9-b43e-065562ed0850
+Labels:                   controller-uid=057ec3ff-fa45-11e9-b43e-065562ed0850
+                          job-name=toolbox
+Annotations:              <none>
+Parallelism:              1
+Completions:              1
+Start Time:               Tue, 29 Oct 2019 13:09:56 +0100
+Completed At:             Tue, 29 Oct 2019 13:10:13 +0100
+Duration:                 17s
+Active Deadline Seconds:  300s
+Pods Statuses:            0 Running / 1 Succeeded / 0 Failed
+Pod Template:
+  Labels:  controller-uid=057ec3ff-fa45-11e9-b43e-065562ed0850
+           job-name=toolbox
+  Containers:
+   toolbox-job:
+    Image:      quay.io/redhat/3scale-toolbox
+    Port:       <none>
+    Host Port:  <none>
+    Args:
+      3scale
+      remote
+      list
+    Environment:
+      HOME:  /var/lib/toolbox
+    Mounts:
+      /var/lib/toolbox from toolbox-config (rw)
+  Volumes:
+   toolbox-config:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  3scale-toolbox
+    Optional:    false
+Events:
+  Type    Reason            Age   From            Message
+  ----    ------            ----  ----            -------
+  Normal  SuccessfulCreate  24s   job-controller  Created pod: toolbox-94xsg
 ```
 
 ### Troubleshooting
