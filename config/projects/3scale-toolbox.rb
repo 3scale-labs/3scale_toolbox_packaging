@@ -14,7 +14,7 @@ install_dir "#{default_root}/#{name}"
 
 # This line is parsed to create docker image
 # regexp: ^build_version '\d+\.\d+\.\d+'$
-build_version '0.14.0'
+build_version '0.16.0'
 
 build_iteration 1
 
