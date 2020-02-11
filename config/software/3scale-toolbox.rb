@@ -4,6 +4,7 @@ default_version '0.16.0'
 
 dependency 'ruby'
 dependency 'rubygems'
+dependency 'liblzma'
 
 version '0.5.0' do
   source url: "https://github.com/3scale/3scale_toolbox/archive/v#{version}.tar.gz",
