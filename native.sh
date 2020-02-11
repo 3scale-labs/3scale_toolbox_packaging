@@ -24,4 +24,4 @@ echo "Using SUDO=${SUDO}, GEM=${GEM}, BUNDLE=${BUNDLE}, RUBY=${RUBY}"
 "$SUDO" "$GEM" env
 
 "$SUDO" "$BUNDLE" install --without development --binstubs /binstubs
-"$SUDO" env "DOCKER_TAG=${DOCKER_TAG:-native}" "$RUBY" /binstubs/omnibus build 3scale-toolbox
+"$SUDO" env "DOCKER_TAG=${DOCKER_TAG:-native}" "$RUBY" /binstubs/omnibus build 3scale-toolbox --log-level debug
