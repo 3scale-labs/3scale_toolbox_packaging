@@ -24,7 +24,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: GAPV8h4dgp+ASHZqzOlykTocG78xscrT846QoELsFWTSb0OB48Omn/gUE6dIlShPA3Ou9b7JQ+kKUTFhU8DRon8QihMIzprrmXP4IpcDvJLu5tQVdENANLQ01xiOh71cwf29vaFCrFkXr9LlmyTs3Z2lCHTpuOHYgETHIDcOR8zkGogdS5TPi/lmpkoPZ8XbndJfw3Y46fNu/GlKKgFpn9fzj9oGHTjFYuAuL2iGrr1pthLeBEc+B3DueLSU1OJKJVqfxuFhHLZgK6jv/BU3gWJERPkLgzYx2O507Ofa0Urp9W14gkNGrOUCh7+y5PlKOViku8FN0p7kOWEhyOWUhzn1jG9qjulLNjddz5n1Gp0mc0/5iEyrp35cyTptIUfQfIiSMe1eRGHK44NxzOHmsAO5X015y1SPujUWRq9KZjk/TuCWx6x7m4vjVgWVoYz51YIiUQiuKkEtQJqBAgseUQrJWmgWzem7edgA23B+LopnDasjih6ja+hkG2Dj+Ou/qeUcHC5C8fdA3oHNqBexyt3eTKsv1wtolV+8sKajfQ0P/y2IYJJlJRVrAMN/cZMDRRgyn8PXgFTMP7FwzIm6SgqG2A+xa+CvWwPGC2NlVuHNKME4YjFCfVdwzCxb9af/LAwsNgwg9W8g3O0zrlrKnFTL7Ox4HJYqFDcCkrWnAWY=
+    secure: V/by4b2X1GtiK0dtBWHEdeh7BSgCMZ1eah2jZHR0GSOcSwanj4KGrBhmAxrRc9Vm0ZxwawWOMmHibVvHCRPH30Cq6foVhwdGnCTqeVFdOhDtkguOw+dpe3MJ6HMPX46+o53rvg6/RPqfq03Ls4PLr+dEjWp2EWUUurTCQPynHeISfFaCroV8HMl4lK3WPlfN/t+xDBK7FgoL+92wLMQCrez7Fk1HPN/RwCUG8LfqIScgjegctY38zu8LA45nYl/neha6e19cDGDtK7nvCJb6J/U5fWXpP60/9GI2iJn7Yy24Z3vbQsjyTKAM1gekoMbaZm6QU7ZYG0FNxs3TqSj9vPIwWLJQpxSpfd7KrbcfrQ6QpAJUvh2e6/AySw4R4sMhNbM5w6oXtnk6NoUaEmMRrQfVnSkbLz6qYOWNdWskdIbJZr9UMblzQWJnTRNPqJ9TmWw1BCwaS3lxrvvV6lK0+A9ioNGuz6qfj2UkKh6suKdAHeaAWddjLe+XbBG5UMKq+7vJ6Ef30zEW8/pjqKynYjP67qg+XVxHHhk+jeqCFrMlqLA0sdXrCC4EIDLKKTSoZLgtXVk/A9JX+0ls5M+gbFZfh0QQM2D5jKmOS4TW2j1VhYjfgGKMSFqEpr0YryTh6vQFXDe3Fajx/BOlR9VkkIF3pVfYeh2nFx3gCLvbFjU=
   file_glob: true
   file:
   - pkg/*.rpm
@@ -32,7 +32,6 @@ deploy:
   - pkg/*.pkg
   on:
     tags: true
-
 before_script:
 - rm -rf pkg/*
 script:
