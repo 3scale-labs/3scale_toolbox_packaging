@@ -12,7 +12,7 @@ homepage 'https://github.com/3scale/3scale_toolbox'
 # and /opt/3scale-toolbox on all other platforms
 install_dir "#{default_root}/#{name}"
 
-build_version '0.18.0'
+build_version '0.18.3'
 
 build_iteration 1
 
