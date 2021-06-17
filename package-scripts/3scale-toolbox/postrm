@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Perform necessary 3scale-toolbox removal steps
+# after package is uninstalled.
+#
+
+rm -rf /usr/bin/3scale
+echo "3scale-toolbox has been uninstalled!"
+
+exit 0
