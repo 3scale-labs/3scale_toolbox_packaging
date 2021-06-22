@@ -5,9 +5,6 @@ default_version '0.18.3'
 dependency 'ruby'
 dependency 'rubygems'
 
-whitelist_file 'libruby.2.7.dylib'
-whitelist_file 'libSystem.B.dylib'
-
 relative_path "3scale_toolbox-#{version}"
 
 build do

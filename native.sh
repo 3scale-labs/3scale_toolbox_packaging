@@ -4,7 +4,6 @@ set -o nounset
 set -o xtrace
 
 DOCKER_IMAGE="${DOCKER_IMAGE:-}"
-SUDO=""
 
 if [ "${DOCKER_IMAGE}" = "centos/ruby-27-centos7" ]
 then
@@ -14,10 +13,6 @@ then
     apt update
     apt install -y git ruby ruby-dev libffi-dev build-essential
     gem install bundler:2.1.4
-elif [ "${DOCKER_IMAGE}" = "osx" ]
-then
-    SUDO="rvmsudo"
-    ${SUDO} gem install bundler:2.1.4
 fi
 
 # Since secure_path is set on our CentOS build images, we also need to ensure
@@ -33,4 +28,4 @@ echo "Using GEM=${GEM}, BUNDLE=${BUNDLE}, RUBY=${RUBY}"
 "$BUNDLE" config set path 'vendor/bundle'
 "$BUNDLE" install
 "$BUNDLE" binstubs omnibus
-${SUDO} bin/omnibus build 3scale-toolbox --log-level debug
+bin/omnibus build 3scale-toolbox --log-level debug

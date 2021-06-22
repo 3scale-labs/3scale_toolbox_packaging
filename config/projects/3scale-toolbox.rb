@@ -20,7 +20,7 @@ dependency "preparation"
 
 # 3scale-toolbox dependencies/components
 override name.to_sym, version: build_version
-override :ruby, version: '2.7.3'
+override :ruby, version: '2.7.1'
 override :rubygems, version: '3.1.2'
 # override url to avoid ftp URI
 # https://blog.travis-ci.com/2018-07-23-the-tale-of-ftp-at-travis-ci

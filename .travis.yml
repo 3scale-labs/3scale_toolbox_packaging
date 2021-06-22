@@ -2,11 +2,6 @@ language: ruby
 install: true
 jobs:
   include:
-  - os: osx
-    env:
-    - BUILD_ENGINE=native
-    - DOCKER_IMAGE=osx
-    rvm: 2.7.0
   - os: linux
     env:
     - BUILD_ENGINE=docker
@@ -27,7 +22,6 @@ deploy:
   file:
   - pkg/*.rpm
   - pkg/*.deb
-  - pkg/*.pkg
   on:
     tags: true
 before_script:
