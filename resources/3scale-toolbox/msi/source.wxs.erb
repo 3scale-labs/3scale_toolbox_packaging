@@ -67,6 +67,13 @@
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="WINDOWSVOLUME">
+          <Directory Id="PROJECTLOCATION" Name="$(var.ProjectLocationDir)" >
+            <Directory Id="PROJECTLOCATIONBIN" Name="bin" >
+              <Component Id="ThreeScaleToolboxPath" Guid="$(var.ThreeScaleToolboxPathGuid)" >
+                <Environment Id="ThreeScaleToolboxPathEnvironment" Name="PATH" Action="set" Part="first" System="yes" Value="[PROJECTLOCATIONBIN]" />
+              </Component>
+            </Directory>
+          </Directory>
 <% hierarchy.each.with_index do |(name, id), index| -%>
         <%= '  '*index %><Directory Id="<%= id %>" Name="<%= name %>">
 <% end -%>
