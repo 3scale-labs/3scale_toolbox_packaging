@@ -14,16 +14,16 @@ append_timestamp false
 #
 # Uncomment this line to change the default base directory to "local"
 # -------------------------------------------------------------------
-base_dir './local'
+#base_dir './local'
 #
 # Alternatively you can tune the individual values
 # ------------------------------------------------
-cache_dir     './local/omnibus/cache'
-git_cache_dir './local/omnibus/cache/git_cache'
-source_dir    './local/omnibus/src'
-build_dir     './local/omnibus/build'
-package_dir   './local/omnibus/pkg'
-package_tmp   './local/omnibus/pkg-tmp'
+#cache_dir     './local/omnibus/cache'
+#git_cache_dir './local/omnibus/cache/git_cache'
+#source_dir    './local/omnibus/src'
+#build_dir     './local/omnibus/build'
+#package_dir   './local/omnibus/pkg'
+#package_tmp   './local/omnibus/pkg-tmp'
 
 # Disable git caching
 # ------------------------------
