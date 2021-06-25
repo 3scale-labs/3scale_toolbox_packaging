@@ -32,17 +32,6 @@ exclude "**/.git"
 exclude "**/bundler/git"
 exclude '**/vendor'
 
-project_location_dir = name
 package :msi do
   upgrade_code '9f6ec4a5-d48c-4fc1-a2c5-e16c81a38b22'
-
-  parameters(
-    ProjectLocationDir: project_location_dir,
-    ThreeScaleToolboxPathGuid: '2fecd030-ef11-4357-93dc-8160b7562e4b'
-  )
-
-  # Use WixUtilExtension to support WixBroadcastEnvironmentChange and notify
-  # the system that we're updating an environment variable (the PATH).
-  wix_candle_extension 'WixUtilExtension'
-  wix_light_extension 'WixUtilExtension'
 end
