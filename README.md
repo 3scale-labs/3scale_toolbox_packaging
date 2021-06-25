@@ -59,24 +59,28 @@ Files will be installed in `/opt/3scale-toolbox`
 
 ### Mac OS X
 
-1. Download `pkg` package.
+1. Install [RVM](https://rvm.io/)
 
 ```bash
-wget `URL_PKG_PACKAGE`
+curl -sSL https://get.rvm.io | bash -s stable
 ```
 
-2. Install the package using the `installer` installer utility.
+2. Install Ruby 2.7.1
 
 ```bash
-installer -pkg 3scaletoolbox-VERSION.pkg -target /
+rvm install 2.7.1
 ```
 
-Files will be installed in `/opt/3scale-toolbox`
-
-3. Create symbolic link on `PATH`.
+2. Use Ruby 2.7.1
 
 ```bash
-ln -s /opt/3scale-toolbox/bin/3scale /usr/local/bin/3scale
+rvm use 2.7.1
+```
+
+3. Install `3scale_toolbox` gem
+
+```bash
+gem install 3scale_toolbox
 ```
 
 4. Test executing `help` command
@@ -86,11 +90,19 @@ ln -s /opt/3scale-toolbox/bin/3scale /usr/local/bin/3scale
 ```
 
 ### Windows
-Requires 64 bit Windows 8.1 or greater or 64 bit Windows Server 2012r2 or greater.
+Requires 64 bit Windows 10.
 
-1. Download `MSI` package.
+1. Download and install `MSI` package.
 
-Once installed, you'll have access to the `3scale` command from your command shell
+2. By default, the toolbox will be installed in `C:\3scale-toolbox`.
+
+3. [Optional] Add `C:\3scale-toolbox\embedded\bin` to the `PATH` env var.
+
+4. From you command shell, test executing the `help` command.
+
+```bash
+C:\> .\3scale-toolbox\embedded\bin\3scale help
+```
 
 ### Docker
 

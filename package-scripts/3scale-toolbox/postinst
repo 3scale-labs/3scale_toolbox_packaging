@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Perform necessary 3scale-toolbox setup steps
+# after package is installed.
+#
+
+PROGNAME=`basename $0`
+
+error_exit()
+{
+  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+  exit 1
+}
+
+
+ln -sf /opt/3scale-toolbox/embedded/bin/3scale /usr/bin/3scale || error_exit "Cannot link 3scale in /usr/bin"
+echo "Thank you for installing 3scale-toolbox!"
+
+exit 0

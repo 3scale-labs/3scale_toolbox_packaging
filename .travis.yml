@@ -1,35 +1,27 @@
 language: ruby
-sudo: required
-if: tag IS present
 install: true
-matrix:
+jobs:
   include:
-  - os: osx
-    env:
-    - BUILD_ENGINE=native
-    rvm: 2.5.0
   - os: linux
     env:
     - BUILD_ENGINE=docker
-    - DOCKER_TAG=xenial-2.5.3
+    - DOCKER_IMAGE=centos/ruby-27-centos7
     services:
     - docker
   - os: linux
     env:
     - BUILD_ENGINE=docker
-    - DOCKER_TAG=centos7-2.5.3
+    - DOCKER_IMAGE="ubuntu:20.04"
     services:
     - docker
 deploy:
   provider: releases
-  skip_cleanup: true
-  api_key:
+  token:
     secure: V/by4b2X1GtiK0dtBWHEdeh7BSgCMZ1eah2jZHR0GSOcSwanj4KGrBhmAxrRc9Vm0ZxwawWOMmHibVvHCRPH30Cq6foVhwdGnCTqeVFdOhDtkguOw+dpe3MJ6HMPX46+o53rvg6/RPqfq03Ls4PLr+dEjWp2EWUUurTCQPynHeISfFaCroV8HMl4lK3WPlfN/t+xDBK7FgoL+92wLMQCrez7Fk1HPN/RwCUG8LfqIScgjegctY38zu8LA45nYl/neha6e19cDGDtK7nvCJb6J/U5fWXpP60/9GI2iJn7Yy24Z3vbQsjyTKAM1gekoMbaZm6QU7ZYG0FNxs3TqSj9vPIwWLJQpxSpfd7KrbcfrQ6QpAJUvh2e6/AySw4R4sMhNbM5w6oXtnk6NoUaEmMRrQfVnSkbLz6qYOWNdWskdIbJZr9UMblzQWJnTRNPqJ9TmWw1BCwaS3lxrvvV6lK0+A9ioNGuz6qfj2UkKh6suKdAHeaAWddjLe+XbBG5UMKq+7vJ6Ef30zEW8/pjqKynYjP67qg+XVxHHhk+jeqCFrMlqLA0sdXrCC4EIDLKKTSoZLgtXVk/A9JX+0ls5M+gbFZfh0QQM2D5jKmOS4TW2j1VhYjfgGKMSFqEpr0YryTh6vQFXDe3Fajx/BOlR9VkkIF3pVfYeh2nFx3gCLvbFjU=
   file_glob: true
   file:
   - pkg/*.rpm
   - pkg/*.deb
-  - pkg/*.pkg
   on:
     tags: true
 before_script:

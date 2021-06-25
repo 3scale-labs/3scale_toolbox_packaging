@@ -21,43 +21,73 @@
     <Media Id="1" Cabinet="Project.cab" EmbedCab="yes" CompressionLevel="high" />
 
     <!--
-      Uncomment launch condition below to check for minimum OS
-      601 = Windows 7/Server 2008R2.
+      Take advantage of Windows Installer 5.0 feature (if available) to disable
+      checkpointing and other costings that take significant amounts of time
+      ref: https://msdn.microsoft.com/en-us/library/windows/desktop/dd408005(v=vs.85).aspx
     -->
-    <!-- Condition Message="!(loc.MinimumOSVersionMessage)">
-      <![CDATA[Installed OR VersionNT >= 601]]>
-    </Condition -->
+    <Property Id="MSIFASTINSTALL" Value="7" />
 
     <!-- We always do Major upgrades -->
     <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" />
 
+    <!--
+      If fastmsi is set, custom actions will be invoked during install to unzip
+      project files, and during uninstall to remove the project folder
+    -->
+    <% if fastmsi %>
+    <SetProperty Id="FastUnzip"
+                 Value="FASTZIPDIR=[INSTALLLOCATION];FASTZIPAPPNAME=chefdk"
+                 Sequence="execute"
+                 Before="FastUnzip" />
+
+    <CustomAction Id="FastUnzip"
+                  BinaryKey="CustomActionFastMsiDLL"
+                  DllEntry="FastUnzip"
+                  Execute="deferred"
+                  Return="check" />
+
+    <Binary Id="CustomActionFastMsiDLL"
+            SourceFile="CustomActionFastMsi.CA.dll" />
+
+    <CustomAction Id="Cleanup"
+                  Directory="INSTALLLOCATION"
+                  ExeCommand="cmd /C &quot;rd /S /Q chefdk&quot;"
+                  Execute="deferred"
+                  Return="ignore" />
+
+    <InstallExecuteSequence>
+      <Custom Action="FastUnzip" After="InstallFiles">NOT Installed</Custom>
+      <Custom Action="Cleanup" After="RemoveFiles">REMOVE~="ALL"</Custom>
+    </InstallExecuteSequence>
+
+    <UI>
+      <ProgressText Action="FastUnzip">!(loc.FileExtractionProgress)</ProgressText>
+    </UI>
+    <% end %>
+
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="WINDOWSVOLUME">
-          <Directory Id="PROJECTLOCATION" Name="$(var.ProjectLocationDir)" >
-            <Directory Id="PROJECTLOCATIONBIN" Name="bin" >
-              <Component Id="ThreeScaleToolboxPath" Guid="$(var.ThreeScaleToolboxPathGuid)" >
-                <Environment Id="ThreeScaleToolboxPathEnvironment" Name="PATH" Action="set" Part="first" System="yes" Value="[PROJECTLOCATIONBIN]" />
-              </Component>
-            </Directory>
-          </Directory>
-        </Directory>
+<% hierarchy.each.with_index do |(name, id), index| -%>
+        <%= '  '*index %><Directory Id="<%= id %>" Name="<%= name %>">
+<% end -%>
+<% hierarchy.keys.each.with_index do |_, index| -%>
+        <%= '  '*(hierarchy.size - index-1) %></Directory>
+<% end -%>
+      </Directory>
     </Directory>
 
     <SetDirectory Id="WINDOWSVOLUME" Value="[WindowsVolume]" />
 
     <!-- Set the components defined in our fragment files that will be used for our feature  -->
-    <Feature Id="ProjectFeature" Title="!(loc.FeatureMainName)" Absent="disallow" AllowAdvertise="no" Level="1">
+    <Feature Id="ProjectFeature" Title="!(loc.FeatureMainName)" Absent="disallow" AllowAdvertise="no" Level="1" ConfigurableDirectory="<%= wix_install_dir %>">
       <ComponentGroupRef Id="ProjectDir" />
-      <ComponentRef Id="ThreeScaleToolboxPath" />
     </Feature>
-
-    <!-- Notify the system that we're changing the PATH -->
-    <CustomActionRef Id="WixBroadcastEnvironmentChange" />
 
     <!-- UI Stuff -->
     <Icon Id="project.ico" SourceFile="Resources\assets\project_16x16.ico"/>
     <Property Id="ARPPRODUCTICON" Value="project.ico" />
-    <Property Id="ARPHELPLINK" Value="https://www.3scale.com" />
+    <Property Id="ARPHELPLINK" Value="http://www.3scale.com/" />
+    <Property Id="WIXUI_INSTALLDIR" Value="<%= wix_install_dir %>" />
 
     <UIRef Id="ProjectUI_InstallDir"/>
     <UI Id="ProjectUI_InstallDir">

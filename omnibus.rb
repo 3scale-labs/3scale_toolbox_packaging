@@ -2,7 +2,7 @@
 # This file is used to configure the 3scale-toolbox project. It contains
 # some minimal configuration examples for working with Omnibus. For a full list
 # of configurable options, please see the documentation for +omnibus/config.rb+.
-
+#
 append_timestamp false
 
 # Build internally
@@ -14,16 +14,16 @@ append_timestamp false
 #
 # Uncomment this line to change the default base directory to "local"
 # -------------------------------------------------------------------
-# base_dir './local'
+#base_dir './local'
 #
 # Alternatively you can tune the individual values
 # ------------------------------------------------
-# cache_dir     './local/omnibus/cache'
-# git_cache_dir './local/omnibus/cache/git_cache'
-# source_dir    './local/omnibus/src'
-# build_dir     './local/omnibus/build'
-# package_dir   './local/omnibus/pkg'
-# package_tmp   './local/omnibus/pkg-tmp'
+#cache_dir     './local/omnibus/cache'
+#git_cache_dir './local/omnibus/cache/git_cache'
+#source_dir    './local/omnibus/src'
+#build_dir     './local/omnibus/build'
+#package_dir   './local/omnibus/pkg'
+#package_tmp   './local/omnibus/pkg-tmp'
 
 # Disable git caching
 # ------------------------------
@@ -32,10 +32,11 @@ append_timestamp false
 # Enable S3 asset caching
 # ------------------------------
 # use_s3_caching true
-# s3_access_key  ENV['AWS_ACCESS_KEY_ID']
-# s3_secret_key  ENV['AWS_SECRET_ACCESS_KEY']
-# s3_profile     ENV['AWS_S3_PROFILE']
-# s3_bucket      ENV['AWS_S3_BUCKET']
+# s3_access_key    ENV['AWS_ACCESS_KEY_ID']
+# s3_secret_key    ENV['AWS_SECRET_ACCESS_KEY']
+# s3_profile       ENV['AWS_S3_PROFILE']
+# s3_iam_role_arn  ENV['S3_IAM_ROLE_ARN']
+# s3_bucket        ENV['AWS_S3_BUCKET']
 
 # Customize compiler bits
 # ------------------------------

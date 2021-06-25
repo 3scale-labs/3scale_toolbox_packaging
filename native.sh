@@ -3,13 +3,16 @@ set -o errexit
 set -o nounset
 set -o xtrace
 
-# Travis uses rvm, which toys with environment variables enough that it's hard
-# to use properly with sudo. So, if rvmsudo is in use, we'll use rvmsudo rather
-# than regular sudo.
-SUDO="sudo"
-if [[ -n "${rvm_path:-}" ]]; then
-  echo "Detected rvm: ${rvm_path}"
-  SUDO="rvmsudo"
+DOCKER_IMAGE="${DOCKER_IMAGE:-}"
+
+if [ "${DOCKER_IMAGE}" = "centos/ruby-27-centos7" ]
+then
+    yum -y install rpm-build
+elif [ "${DOCKER_IMAGE}" = "ubuntu:20.04" ]
+then
+    apt update
+    apt install -y git ruby ruby-dev libffi-dev build-essential
+    gem install bundler:2.1.4
 fi
 
 # Since secure_path is set on our CentOS build images, we also need to ensure
@@ -18,10 +21,11 @@ GEM="$(command -v gem)"
 BUNDLE="$(command -v bundle)"
 RUBY="$(command -v ruby)"
 
-echo "Using SUDO=${SUDO}, GEM=${GEM}, BUNDLE=${BUNDLE}, RUBY=${RUBY}"
+echo "Using GEM=${GEM}, BUNDLE=${BUNDLE}, RUBY=${RUBY}"
 
 "$GEM" env
-"$SUDO" "$GEM" env
-
-"$SUDO" "$BUNDLE" install --without development --binstubs /binstubs
-"$SUDO" env "DOCKER_TAG=${DOCKER_TAG:-native}" "$RUBY" /binstubs/omnibus build 3scale-toolbox --log-level debug
+"$BUNDLE" config set without 'development'
+"$BUNDLE" config set path 'vendor/bundle'
+"$BUNDLE" install
+"$BUNDLE" binstubs omnibus
+bin/omnibus build 3scale-toolbox --log-level debug

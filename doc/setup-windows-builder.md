@@ -36,11 +36,11 @@ Install the "Desktop Development with C++" and Windows 8.1 SDK components.
 https://visualstudio.microsoft.com/downloads/
 ```
 
-* Ruby framework and Devkit 2.5.3
+* Ruby framework and Devkit 2.7.3
 Make sure MSYS is installed in `C:\msys2`
 
 ```
-https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.5.3-1/rubyinstaller-devkit-2.5.3-1-x64.exe
+https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.7.3-1/rubyinstaller-devkit-2.7.3-1-x64.exe
 ```
 
 Preparation Steps
@@ -62,6 +62,7 @@ $env:path = "C:\Program Files\7-Zip;$env:path"
 $env:path = "C:\Program Files (x86)\WiX Toolset v3.11\bin;$env:path"
 $env:path = "C:\Program Files (x86)\Windows Kits\8.1\bin\x64;$env:path"
 $env:MSYSTEM = "mingw64"
+$env:MSYS2_INSTALL_DIR = "C:\msys2"
 $env:OMNIBUS_WINDOWS_ARCH = "x64"
 ```
 
