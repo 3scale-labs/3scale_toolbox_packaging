@@ -90,11 +90,19 @@ gem install 3scale_toolbox
 ```
 
 ### Windows
-Requires 64 bit Windows 8.1 or greater or 64 bit Windows Server 2012r2 or greater.
+Requires 64 bit Windows 10.
 
-1. Download `MSI` package.
+1. Download and install `MSI` package.
 
-Once installed, you'll have access to the `3scale` command from your command shell
+2. By default, the toolbox will be installed in `C:\3scale-toolbox`.
+
+3. [Optional] Add `C:\3scale-toolbox\embedded\bin` to the `PATH` env var.
+
+4. From you command shell, test executing the `help` command.
+
+```bash
+C:\> .\3scale-toolbox\embedded\bin\3scale help
+```
 
 ### Docker
 
