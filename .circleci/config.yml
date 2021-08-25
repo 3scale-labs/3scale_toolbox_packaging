@@ -1,0 +1,85 @@
+version: 2.1
+
+##################################### YAML ANCHORS  ############################################
+
+tag-trigger: &tag-trigger
+  tags:
+    only: /^v.*/
+
+jobs:
+  ubuntu-build:
+    docker:
+      - image: ubuntu:20.04
+    steps:
+      - checkout
+      - run:
+          name: Install Ubuntu 20.04 deps
+          command: |
+            apt update && apt install -y git ruby ruby-dev libffi-dev build-essential
+      - run:
+          name: Ubuntu 20.04 package
+          command: |
+            ./build.sh
+      - persist_to_workspace:
+          root: ./pkg
+          paths:
+            - "*.deb"
+
+  centos-build:
+    docker:
+      - image: centos/ruby-27-centos7
+        user: root
+    steps:
+      - run:
+          name: Install Centos7 deps
+          command: |
+            yum -y install rpm-build yajl yajl-devel
+      - run:
+        # builtin checkout does not work with root user,
+        # ssh fingerprint prompt screws up the job
+          name: Manual checkout
+          command: |
+            git clone https://github.com/3scale-labs/3scale_toolbox_packaging.git .
+            if [ -n "$CIRCLE_TAG" ]; then
+              git checkout --force "$CIRCLE_TAG"
+            else
+              git checkout --force -B "$CIRCLE_BRANCH" "$CIRCLE_SHA1"
+            fi
+      - run:
+          name: Centos7 package
+          command: |
+            ./build.sh
+      - persist_to_workspace:
+          root: ./pkg
+          paths:
+            - "*.rpm"
+
+  publish-github-release:
+    docker:
+      - image: cibuilds/github:0.10
+    steps:
+      - attach_workspace:
+          at: ./artifacts
+      - run:
+          name: "Publish Release on GitHub"
+          command: |
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ./artifacts/
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - ubuntu-build:
+          filters:
+            <<: *tag-trigger
+      - centos-build:
+          filters:
+            <<: *tag-trigger
+      - publish-github-release:
+          requires:
+            - ubuntu-build
+            - centos-build
+          filters:
+            <<: *tag-trigger
+            branches:
+              ignore: /.*/
