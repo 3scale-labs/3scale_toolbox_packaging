@@ -36,6 +36,10 @@ jobs:
           command: |
             yum -y install rpm-build yajl
       - run:
+          name: Add github.com to known hosts
+          command: |
+            ssh-keyscan github.com >> /root/.ssh/known_hosts
+      - run:
           name: UBI8 package
           command: |
             ./build.sh
