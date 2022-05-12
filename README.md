@@ -11,7 +11,7 @@ Download packages from [latest release](https://github.com/3scale/3scale_toolbox
 
 ## PLATFORMS
 
-* [CentOS/Fedora](#centos-fedora)
+* [RHEL/Fedora](#rhel-fedora)
 * [Ubuntu/Debian](#ubuntu-debian)
 * [Mac OS X](#mac-os-x)
 * [Windows](#windows)
@@ -19,7 +19,7 @@ Download packages from [latest release](https://github.com/3scale/3scale_toolbox
 * [Kubernetes](#kubernetes)
 
 
-### Centos Fedora
+### RHEL Fedora
 
 1. Install the `RPM` package using the `rpm` installer utility.
 
