@@ -3,8 +3,6 @@ set -o errexit
 set -o nounset
 set -o xtrace
 
-# Since secure_path is set on our CentOS build images, we also need to ensure
-# we only use absolute paths when referencing the binaries we want to run.
 GEM="$(command -v gem)"
 $GEM install bundler:2.2.21
 BUNDLE="$(command -v bundle)"

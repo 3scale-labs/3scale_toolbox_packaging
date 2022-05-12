@@ -25,28 +25,22 @@ jobs:
           paths:
             - "*.deb"
 
-  centos-build:
+  ubi8-build:
     docker:
-      - image: centos/ruby-27-centos7
+      - image: registry.access.redhat.com/ubi8/ruby-27:1
         user: root
     steps:
+      - checkout
       - run:
-          name: Install Centos7 deps
+          name: Install UBI8 deps
           command: |
-            yum -y install rpm-build yajl yajl-devel
+            yum -y install rpm-build yajl
       - run:
-        # builtin checkout does not work with root user,
-        # ssh fingerprint prompt screws up the job
-          name: Manual checkout
+          name: Add github.com to known hosts
           command: |
-            git clone https://github.com/3scale-labs/3scale_toolbox_packaging.git .
-            if [ -n "$CIRCLE_TAG" ]; then
-              git checkout --force "$CIRCLE_TAG"
-            else
-              git checkout --force -B "$CIRCLE_BRANCH" "$CIRCLE_SHA1"
-            fi
+            ssh-keyscan github.com >> /root/.ssh/known_hosts
       - run:
-          name: Centos7 package
+          name: UBI8 package
           command: |
             ./build.sh
       - persist_to_workspace:
@@ -72,13 +66,13 @@ workflows:
       - ubuntu-build:
           filters:
             <<: *tag-trigger
-      - centos-build:
+      - ubi8-build:
           filters:
             <<: *tag-trigger
       - publish-github-release:
           requires:
             - ubuntu-build
-            - centos-build
+            - ubi8-build
           filters:
             <<: *tag-trigger
             branches:
