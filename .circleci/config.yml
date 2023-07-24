@@ -15,6 +15,10 @@ jobs:
           name: Install Ubuntu 22.04 deps
           command: |
             apt update && apt install -y git ruby ruby-dev libffi-dev build-essential
+      - run:
+          name: Add github.com to known hosts
+          command: |
+            ssh-keyscan github.com >> /root/.ssh/known_hosts
       - checkout
       - run:
           name: Ubuntu 22.04 package
