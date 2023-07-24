@@ -9,7 +9,7 @@ tag-trigger: &tag-trigger
 jobs:
   ubuntu-build:
     docker:
-      - image: ubuntu-2004:202201-02
+      - image: ubuntu-2004:2023.07.1
     steps:
       - checkout
       - run:
