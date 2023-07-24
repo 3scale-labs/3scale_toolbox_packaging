@@ -9,7 +9,7 @@ tag-trigger: &tag-trigger
 jobs:
   ubuntu-build:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu-2004:202201-02
     steps:
       - checkout
       - run:
@@ -27,7 +27,7 @@ jobs:
 
   ubi8-build:
     docker:
-      - image: registry.access.redhat.com/ubi8/ruby-27:1
+      - image: registry.access.redhat.com/ubi8/ruby-30:1
         user: root
     steps:
       - checkout
