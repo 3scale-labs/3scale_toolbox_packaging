@@ -1,6 +1,6 @@
 # These options are required for all software definitions
 name '3scale-toolbox'
-default_version '0.20.0'
+default_version '1.0.0'
 
 dependency 'ruby'
 dependency 'rubygems'
